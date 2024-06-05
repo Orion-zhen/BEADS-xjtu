@@ -1017,8 +1017,8 @@ bool VeriFlow::verifyRule(const Rule& rule, int command, double& updateTime, dou
 	}
 	else
 	{
-		fprintf(fp, "\n");
-		fprintf(fp, "[VeriFlow::verifyRule] ecCount: %lu\n", ecCount);
+		fprintf(stdout, "\n");
+		fprintf(stdout, "[VeriFlow::verifyRule] ecCount: %lu\n", ecCount);
 	}
 
 	// fprintf(stdout, "[VeriFlow::verifyRule] Generating forwarding graphs...\n");
@@ -1128,16 +1128,16 @@ bool VeriFlow::traverseForwardingGraph(const EquivalenceClass& packetClass, Forw
 	
 	if (find(visited.begin(), visited.end(), currentLocation) != visited.end())
 	{
-		fprintf(fp, "\n");
-		fprintf(fp, "[VeriFlow::traverseForwardingGraph] Found a LOOP for the following packet class at node %s.\n", currentLocation.c_str());
-		fprintf(fp, "[VeriFlow::traverseForwardingGraph] PacketClass: %s\n", packetClass.toString().c_str());
+		fprintf(stdout, "\n");
+		fprintf(stdout, "[VeriFlow::traverseForwardingGraph] Found a LOOP for the following packet class at node %s.\n", currentLocation.c_str());
+		fprintf(stdout, "[VeriFlow::traverseForwardingGraph] PacketClass: %s\n", packetClass.toString().c_str());
 		for_each(
-			visited.begin(), visited.end(), [=](string item)
+			visited.begin(), visited.end(), [](string item)
 			{
-				fprintf(fp, "%s -> ", item.c_str());
+				fprintf(stdout, "%s -> ", item.c_str());
 			}
 		);
-		fprintf(fp, "%s\n", currentLocation.c_str());
+		fprintf(stdout, "%s\n", currentLocation.c_str());
 		return false;
 	}
 	visited.push_back(currentLocation);
