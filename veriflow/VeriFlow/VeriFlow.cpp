@@ -1016,8 +1016,8 @@ bool VeriFlow::verifyRule(const Rule& rule, int command, double& updateTime, dou
 	}
 	else
 	{
-		// fprintf(stdout, "\n");
-		// fprintf(stdout, "[VeriFlow::verifyRule] ecCount: %lu\n", ecCount);
+		fprintf(stdout, "\n");
+		fprintf(stdout, "[VeriFlow::verifyRule] ecCount: %lu\n", ecCount);
 	}
 
 	// fprintf(stdout, "[VeriFlow::verifyRule] Generating forwarding graphs...\n");
