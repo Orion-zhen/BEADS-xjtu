@@ -1132,7 +1132,7 @@ bool VeriFlow::traverseForwardingGraph(const EquivalenceClass& packetClass, Forw
 		fprintf(stdout, "[VeriFlow::traverseForwardingGraph] Found a LOOP for the following packet class at node %s.\n", currentLocation.c_str());
 		fprintf(stdout, "[VeriFlow::traverseForwardingGraph] PacketClass: %s\n", packetClass.toString().c_str());
 		for_each(
-			visited.begin(), visited.end(), [&](auto item)
+			visited.begin(), visited.end(), [](string item)
 			{
 				fprintf(stdout, "%s -> ", item.c_str());
 			}
