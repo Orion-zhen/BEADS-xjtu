@@ -110,14 +110,14 @@ void EquivalenceClass::clear()
 string EquivalenceClass::toString() const
 {
 	char buffer[1024];
-	sprintf(buffer, "[EquivalenceClass] dl_src (%lu-%s, %lu-%s), dl_dst (%lu-%s, %lu-%s)",
-			this->lowerBound[DL_SRC], ::getMacValueAsString(this->lowerBound[DL_SRC]).c_str(),
-			this->upperBound[DL_SRC], ::getMacValueAsString(this->upperBound[DL_SRC]).c_str(),
-			this->lowerBound[DL_DST], ::getMacValueAsString(this->lowerBound[DL_DST]).c_str(),
-			this->upperBound[DL_DST], ::getMacValueAsString(this->upperBound[DL_DST]).c_str());
+	// sprintf(buffer, "[EquivalenceClass] dl_src (%lu-%s, %lu-%s), dl_dst (%lu-%s, %lu-%s)",
+	// 		this->lowerBound[DL_SRC], ::getMacValueAsString(this->lowerBound[DL_SRC]).c_str(),
+	// 		this->upperBound[DL_SRC], ::getMacValueAsString(this->upperBound[DL_SRC]).c_str(),
+	// 		this->lowerBound[DL_DST], ::getMacValueAsString(this->lowerBound[DL_DST]).c_str(),
+	// 		this->upperBound[DL_DST], ::getMacValueAsString(this->upperBound[DL_DST]).c_str());
 
 	string retVal = buffer;
-	retVal += ", ";
+	// retVal += ", ";
 
 	sprintf(buffer, "nw_src (%lu-%s, %lu-%s), nw_dst (%lu-%s, %lu-%s)",
 			this->lowerBound[NW_SRC], ::getIpValueAsString(this->lowerBound[NW_SRC]).c_str(),
@@ -128,16 +128,25 @@ string EquivalenceClass::toString() const
 	retVal += buffer;
 	retVal += ", ";
 
-	for(int i = 0; i < ALL_FIELD_INDEX_END_MARKER; i++)
-	{
-		sprintf(buffer, "Field %d (%lu, %lu)", i, this->lowerBound[i], this->upperBound[i]);
-		retVal += buffer;
+	// NOT all fields
+	// for(int i = 0; i < ALL_FIELD_INDEX_END_MARKER; i++)
+	// {
+	// 	sprintf(buffer, "Field %d (%lu, %lu)", i, this->lowerBound[i], this->upperBound[i]);
+	// 	retVal += buffer;
 
-		if(i < (ALL_FIELD_INDEX_END_MARKER - 1))
-		{
-			retVal += ", ";
-		}
-	}
+	// 	if(i < (ALL_FIELD_INDEX_END_MARKER - 1))
+	// 	{
+	// 		retVal += ", ";
+	// 	}
+	// }
+	sprintf(buffer, "nw_proto (%lu, %lu)", this->lowerBound[NW_PROTO], this->upperBound[NW_PROTO]);
+	retVal += buffer;
+	retVal += ", ";
+
+	sprintf(buffer, "tp_src (%lu, %lu), tp_dst (%lu, %lu)",
+			this->lowerBound[TP_SRC], this->upperBound[TP_SRC],
+			this->lowerBound[TP_DST], this->upperBound[TP_DST]);
+	retVal += buffer;
 
 	return retVal;
 }
